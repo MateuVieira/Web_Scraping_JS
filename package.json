@@ -1,0 +1,17 @@
+{
+  "name": "projeto-teste-web-scraping",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "test1": "nodemon appTeste1.js",
+    "test2": "nodemon appTeste2.js"
+  },
+  "dependencies": {
+    "puppeteer": "^2.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2",
+    "sucrase": "^3.12.1"
+  }
+}
