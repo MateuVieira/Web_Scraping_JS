@@ -119,7 +119,7 @@ async function scrapeProductTest(url) {
       console.log(`Total of Products = ${productsList[0]} - Take Product ${i}  `);
 
       // Uma promise para lidar com a extração de dados do produto
-      const {
+      const [
         nameProduct,
         imgProduct,
         oldPriceProduct,
@@ -129,7 +129,7 @@ async function scrapeProductTest(url) {
         priceProductWithDiscont,
         priceDiscont,
         priceDisabled
-      } = await Promise.all([
+      ] = await Promise.all([
         takeName(page, i),
         takeImgUrl(page, i),
         takeOldPrice(page, i),
@@ -138,7 +138,7 @@ async function scrapeProductTest(url) {
         takePriceByProduct(page, i),
         takePriceProductWithDiscont(page, i),
         takeDiscontProduct(page, i),
-        takeDisabledProduct(page, i)
+        takeDisabledProduct(page, i),
       ]);
 
       // Add dados extraidos a váriavel de armazenamento
@@ -338,6 +338,7 @@ async function rumAllURL() {
 async function runScriptSaveJSON(url) {
   var hrstart_script = process.hrtime();
   await rumAllURL(url);
+
   await saveJSON();
   console.log('END SCRIPT');
 
@@ -349,85 +350,85 @@ async function runScriptSaveJSON(url) {
 //////////////////////////////////////////////////////////////////////////////////////
 
 
+const url = [
+  `https://www.paodeacucar.com/secoes/C4215/sucos-e-refrescos?qt=12&ftr=facetSubShelf_ss:4215_Sucos%20e%20Refrescos&p=0&gt=list`,
+  `https://www.paodeacucar.com/secoes/C4215/whiskies-e-destilados?qt=12&ftr=facetSubShelf_ss:4215_Cervejas%20Especiais__facetSubShelf_ss:4215_Whiskies%20e%20Destilados&p=0&gt=list`,
+  `https://www.paodeacucar.com/secoes/C4215/vodka-cachacas-e-saques?qt=12&ftr=facetSubShelf_ss:4215_Vodka,%20Cacha%C3%A7as%20e%20Saqu%C3%AAs&p=0&gt=list`,
+  // `https://www.paodeacucar.com/secoes/C4215/cervejas-especiais?qt=12&ftr=facetSubShelf_ss:4215_Cervejas%20Especiais&p=0&gt=list`,
+  // `https://www.paodeacucar.com/secoes/C4215/cervejas?qt=12&ftr=facetSubShelf_ss:4215_Refrigerantes__facetSubShelf_ss:4215_Cervejas&p=0&gt=list`,
+  // `https://www.paodeacucar.com/secoes/C4215/refrigerantes?qt=12&ftr=facetSubShelf_ss:4215_Refrigerantes&p=0&gt=list`,
+  // `https://www.paodeacucar.com/secoes/C4215/chas-e-mates?qt=12&ftr=facetSubShelf_ss:4215_Ch%C3%A1s%20e%20Mates&p=0&gt=list`,
+  // `https://www.paodeacucar.com/secoes/C4215/cafes?qt=12&ftr=facetSubShelf_ss:4215_Caf%C3%A9s&p=0&gt=list`,
+  // `https://www.paodeacucar.com/secoes/C4215/capsulas-de-cafes-e-chas?qt=12&ftr=facetSubShelf_ss:4215_C%C3%A1psulas%20de%20Caf%C3%A9s%20e%20Ch%C3%A1s&p=0&gt=list`,
+  // `https://www.paodeacucar.com/secoes/C4215/achocolatados-bebidas-lacteas-e-de-soja?qt=12&ftr=facetSubShelf_ss:4215_Achocolatados,%20Bebidas%20L%C3%A1cteas%20e%20de%20Soja&p=0&gt=list`,
+  // `https://www.paodeacucar.com/secoes/C4215/aguas?qt=12&ftr=facetSubShelf_ss:4215_%C3%81guas&p=0&gt=list`,
+  // `https://www.paodeacucar.com/secoes/C4215/leite?qt=12&ftr=facetSubShelf_ss:4215_Leite&p=0&gt=list`,
+  // `https://www.paodeacucar.com/secoes/C4215/energeticos?qt=12&ftr=facetSubShelf_ss:4215_Energ%C3%A9ticos&p=0&gt=list`,
+  // `https://www.paodeacucar.com/secoes/C4215/agua-de-coco?qt=12&ftr=facetSubShelf_ss:4215_%C3%81gua%20de%20Coco&p=0&gt=list`,
+  // `https://www.paodeacucar.com/secoes/C4215/isotonicos?qt=12&ftr=facetSubShelf_ss:4215_Isot%C3%B4nicos&p=0&gt=list`,
+  // `https://www.paodeacucar.com/secoes/C4215/bebidas-gaseficadas?qt=12&ftr=facetSubShelf_ss:4215_Bebidas%20gaseficadas&p=0&gt=list`,
+  // `https://www.paodeacucar.com/busca?w=vinhos%20e%20espumantes&c=%20categoria:vinhoseespumantes%20pb:01&qt=12&ftr=currentPrice_normal_d:%5B100%20TO%20200%5D__facetSubShelf_ss:4215_Vinhos%20e%20Espumantes__currentPrice_normal_d:%5B200%20TO%20*%5D&p=1&gt=list`,
+  // `https://www.paodeacucar.com/busca?w=vinhos%20e%20espumantes&c=%20categoria:vinhoseespumantes%20pb:02&qt=12&ftr=currentPrice_normal_d:%5B100%20TO%20200%5D__facetSubShelf_ss:4215_Vinhos%20e%20Espumantes__currentPrice_normal_d:%5B200%20TO%20*%5D&p=1&gt=list`,
+  // `https://www.paodeacucar.com/busca?w=vinhos%20e%20espumantes&c=%20categoria:vinhoseespumantes%20pb:03&qt=12&ftr=currentPrice_normal_d:%5B100%20TO%20200%5D__facetSubShelf_ss:4215_Vinhos%20e%20Espumantes__currentPrice_normal_d:%5B200%20TO%20*%5D&p=1&gt=list`,
+  // `https://www.paodeacucar.com/busca?w=vinhos%20e%20espumantes&c=%20categoria:vinhoseespumantes%20pb:04&qt=12&ftr=currentPrice_normal_d:%5B100%20TO%20200%5D__facetSubShelf_ss:4215_Vinhos%20e%20Espumantes__currentPrice_normal_d:%5B200%20TO%20*%5D&p=1&gt=list`,
+  // `https://www.paodeacucar.com/busca?w=vinhos%20e%20espumantes&c=%20categoria:clubdessommeliers%20categoria:espumantesesidras&qt=12&ftr=currentPrice_normal_d:%5B100%20TO%20200%5D__facetSubShelf_ss:4215_Vinhos%20e%20Espumantes__currentPrice_normal_d:%5B200%20TO%20*%5D&p=1&gt=list`,
+];
+
 // const url = [
-//   `https://www.paodeacucar.com/secoes/C4215/sucos-e-refrescos?qt=12&ftr=facetSubShelf_ss:4215_Sucos%20e%20Refrescos&p=0&gt=list`,
-//   `https://www.paodeacucar.com/secoes/C4215/whiskies-e-destilados?qt=12&ftr=facetSubShelf_ss:4215_Cervejas%20Especiais__facetSubShelf_ss:4215_Whiskies%20e%20Destilados&p=0&gt=list`,
-//   `https://www.paodeacucar.com/secoes/C4215/vodka-cachacas-e-saques?qt=12&ftr=facetSubShelf_ss:4215_Vodka,%20Cacha%C3%A7as%20e%20Saqu%C3%AAs&p=0&gt=list`,
-//   `https://www.paodeacucar.com/secoes/C4215/cervejas-especiais?qt=12&ftr=facetSubShelf_ss:4215_Cervejas%20Especiais&p=0&gt=list`,
-//   `https://www.paodeacucar.com/secoes/C4215/cervejas?qt=12&ftr=facetSubShelf_ss:4215_Refrigerantes__facetSubShelf_ss:4215_Cervejas&p=0&gt=list`,
-//   `https://www.paodeacucar.com/secoes/C4215/refrigerantes?qt=12&ftr=facetSubShelf_ss:4215_Refrigerantes&p=0&gt=list`,
-//   `https://www.paodeacucar.com/secoes/C4215/chas-e-mates?qt=12&ftr=facetSubShelf_ss:4215_Ch%C3%A1s%20e%20Mates&p=0&gt=list`,
-//   `https://www.paodeacucar.com/secoes/C4215/cafes?qt=12&ftr=facetSubShelf_ss:4215_Caf%C3%A9s&p=0&gt=list`,
+//   `https://www.paodeacucar.com/busca?w=vinho&c=%20tipo:rose&qt=12&ftr=facetSubShelf_ss:4215_Cervejas%20Especiais__facetSubShelf_ss:4215_Vinhos%20e%20Espumantes&p=1&gt=list`,
+//   `https://www.paodeacucar.com/busca?w=vinho&c=%20tipo:espumante&qt=12&ftr=facetSubShelf_ss:4215_Cervejas%20Especiais__facetSubShelf_ss:4215_Vinhos%20e%20Espumantes&p=1&gt=list`,
+//   `https://www.paodeacucar.com/busca?w=vinho&c=%20tipo:branco%20pb:03&qt=12&ftr=facetSubShelf_ss:4215_Cervejas%20Especiais__facetSubShelf_ss:4215_Vinhos%20e%20Espumantes&p=1&gt=list`,
+//   `https://www.paodeacucar.com/busca?w=vinho&c=%20tipo:branco%20pb:01%20pb:02%20pb:00&qt=12&ftr=facetSubShelf_ss:4215_Cervejas%20Especiais__facetSubShelf_ss:4215_Vinhos%20e%20Espumantes&p=1&gt=list`,
+//   `https://www.paodeacucar.com/busca?w=vinho&c=%20tipo:tinto%20pb:00%20pb:01%20pb:02&qt=12&ftr=facetSubShelf_ss:4215_Cervejas%20Especiais__facetSubShelf_ss:4215_Vinhos%20e%20Espumantes&p=1&gt=list`,
+//   `https://www.paodeacucar.com/busca?w=vinho&c=%20tipo:tinto%20pb:03&qt=12&ftr=facetSubShelf_ss:4215_Cervejas%20Especiais__facetSubShelf_ss:4215_Vinhos%20e%20Espumantes&p=1&gt=list`,
+//   `https://www.paodeacucar.com/secoes/C4215/sucos-e-refrescos?qt=12&ftr=currentPrice_normal_d:%255B100%20TO%20200%255D__facetSubShelf_ss:4215_Sucos%20e%20Refrescos__currentPrice_normal_d:%5B10%20TO%2025%5D&p=0&gt=list`,
+//   `https://www.paodeacucar.com/secoes/C4215/sucos-e-refrescos?qt=12&ftr=currentPrice_normal_d:%255B10%20TO%2025%255D__facetSubShelf_ss:4215_Sucos%20e%20Refrescos__currentPrice_normal_d:%5B25%20TO%2050%5D&p=0&gt=list`,
+//   `https://www.paodeacucar.com/secoes/C4215/sucos-e-refrescos?qt=12&ftr=currentPrice_normal_d:%255B25%20TO%2050%255D__facetSubShelf_ss:4215_Sucos%20e%20Refrescos__currentPrice_normal_d:%5B50%20TO%20100%5D&p=0&gt=list`,
+//   `https://www.paodeacucar.com/secoes/C4215/sucos-e-refrescos?qt=12&ftr=currentPrice_normal_d:%255B100%20TO%20200%255D__facetSubShelf_ss:4215_Sucos%20e%20Refrescos__currentPrice_normal_d:%5B0%20TO%2010%5D&p=0&gt=list`,
+//   `https://www.paodeacucar.com/secoes/C4215/cervejas-especiais?qt=12&ftr=currentPrice_normal_d:%255B100%20TO%20200%255D__facetSubShelf_ss:4215_Cervejas%20Especiais__currentPrice_normal_d:%5B0%20TO%2010%5D&p=0&gt=list`,
+//   `https://www.paodeacucar.com/secoes/C4215/cervejas-especiais?qt=12&ftr=currentPrice_normal_d:%255B0%20TO%2010%255D__facetSubShelf_ss:4215_Cervejas%20Especiais__currentPrice_normal_d:%5B10%20TO%2025%5D&p=0&gt=list`,
+//   `https://www.paodeacucar.com/secoes/C4215/cervejas-especiais?qt=12&ftr=currentPrice_normal_d:%255B10%20TO%2025%255D__facetSubShelf_ss:4215_Cervejas%20Especiais__currentPrice_normal_d:%5B25%20TO%2050%5D&p=0&gt=list`,
+//   `https://www.paodeacucar.com/secoes/C4215/cervejas-especiais?qt=12&ftr=currentPrice_normal_d:%255B25%20TO%2050%255D__facetSubShelf_ss:4215_Cervejas%20Especiais__currentPrice_normal_d:%5B50%20TO%20100%5D&p=0&gt=list`,
+//   `https://www.paodeacucar.com/secoes/C4215/cervejas-especiais?qt=12&ftr=currentPrice_normal_d:%255B50%20TO%20100%255D__facetSubShelf_ss:4215_Cervejas%20Especiais__currentPrice_normal_d:%5B100%20TO%20200%5D&p=0&gt=list`,
+//   `https://www.paodeacucar.com/secoes/C4215/whiskies-e-destilados?qt=12&ftr=facetSubShelf_ss:4215_Whiskies%20e%20Destilados__currentPrice_normal_d:%5B0%20TO%2010%5D&p=0&gt=list`,
+//   `https://www.paodeacucar.com/secoes/C4215/whiskies-e-destilados?qt=12&ftr=facetSubShelf_ss:4215_Whiskies%20e%20Destilados__currentPrice_normal_d:%5B0%20TO%2010%5D&p=0&gt=list`,
+//   `https://www.paodeacucar.com/secoes/C4215/whiskies-e-destilados?qt=12&ftr=currentPrice_normal_d:%255B0%20TO%2010%255D__facetSubShelf_ss:4215_Whiskies%20e%20Destilados__currentPrice_normal_d:%5B10%20TO%2025%5D&p=0&gt=list`,
+//   `https://www.paodeacucar.com/secoes/C4215/whiskies-e-destilados?qt=12&ftr=currentPrice_normal_d:%255B10%20TO%2025%255D__facetSubShelf_ss:4215_Whiskies%20e%20Destilados__currentPrice_normal_d:%5B25%20TO%2050%5D&p=0&gt=list`,
+//   `https://www.paodeacucar.com/secoes/C4215/whiskies-e-destilados?qt=12&ftr=currentPrice_normal_d:%255B25%20TO%2050%255D__facetSubShelf_ss:4215_Whiskies%20e%20Destilados__currentPrice_normal_d:%5B50%20TO%20100%5D&p=0&gt=list`,
+//   `https://www.paodeacucar.com/secoes/C4215/whiskies-e-destilados?qt=12&ftr=currentPrice_normal_d:%255B50%20TO%20100%255D__facetSubShelf_ss:4215_Whiskies%20e%20Destilados__currentPrice_normal_d:%5B100%20TO%20200%5D&p=0&gt=list`,
+//   `https://www.paodeacucar.com/secoes/C4215/whiskies-e-destilados?qt=12&ftr=currentPrice_normal_d:%255B100%20TO%20200%255D__facetSubShelf_ss:4215_Whiskies%20e%20Destilados__currentPrice_normal_d:%5B200%20TO%20*%5D&p=0&gt=list`,
+//   `https://www.paodeacucar.com/secoes/C4215/vodka-cachacas-e-saques?qt=12&ftr=facetSubShelf_ss:4215_Vodka%252C%20Cacha%25C3%25A7as%20e%20Saqu%25C3%25AAs__currentPrice_normal_d:%5B0%20TO%2010%5D&p=0&gt=list`,
+//   `https://www.paodeacucar.com/secoes/C4215/vodka-cachacas-e-saques?qt=12&ftr=currentPrice_normal_d:%255B0%20TO%2010%255D__facetSubShelf_ss:4215_Vodka%252C%20Cacha%25C3%25A7as%20e%20Saqu%25C3%25AAs__currentPrice_normal_d:%5B10%20TO%2025%5D&p=0&gt=list`,
+//   `https://www.paodeacucar.com/secoes/C4215/vodka-cachacas-e-saques?qt=12&ftr=currentPrice_normal_d:%255B10%20TO%2025%255D__facetSubShelf_ss:4215_Vodka%252C%20Cacha%25C3%25A7as%20e%20Saqu%25C3%25AAs__currentPrice_normal_d:%5B25%20TO%2050%5D&p=0&gt=list`,
+//   `https://www.paodeacucar.com/secoes/C4215/vodka-cachacas-e-saques?qt=12&ftr=currentPrice_normal_d:%255B25%20TO%2050%255D__facetSubShelf_ss:4215_Vodka%252C%20Cacha%25C3%25A7as%20e%20Saqu%25C3%25AAs__currentPrice_normal_d:%5B50%20TO%20100%5D&p=0&gt=list`,
+//   `https://www.paodeacucar.com/secoes/C4215/vodka-cachacas-e-saques?qt=12&ftr=currentPrice_normal_d:%255B50%20TO%20100%255D__facetSubShelf_ss:4215_Vodka%252C%20Cacha%25C3%25A7as%20e%20Saqu%25C3%25AAs__currentPrice_normal_d:%5B100%20TO%20200%5D&p=0&gt=list`,
+//   `https://www.paodeacucar.com/secoes/C4215/vodka-cachacas-e-saques?qt=12&ftr=currentPrice_normal_d:%255B100%20TO%20200%255D__facetSubShelf_ss:4215_Vodka%252C%20Cacha%25C3%25A7as%20e%20Saqu%25C3%25AAs__currentPrice_normal_d:%5B200%20TO%20*%5D&p=0&gt=list`,
+//   `https://www.paodeacucar.com/secoes/C4215/cervejas?qt=12&ftr=facetSubShelf_ss:4215_Cervejas__currentPrice_normal_d:%5B0%20TO%2010%5D&p=0&gt=list`,
+//   `https://www.paodeacucar.com/secoes/C4215/cervejas?qt=12&ftr=currentPrice_normal_d:%255B0%20TO%2010%255D__facetSubShelf_ss:4215_Cervejas__currentPrice_normal_d:%5B10%20TO%2025%5D&p=0&gt=list`,
+//   `https://www.paodeacucar.com/secoes/C4215/cervejas?qt=12&ftr=currentPrice_normal_d:%255B10%20TO%2025%255D__facetSubShelf_ss:4215_Cervejas__currentPrice_normal_d:%5B25%20TO%2050%5D&p=0&gt=list`,
+//   `https://www.paodeacucar.com/secoes/C4215/cervejas?qt=12&ftr=currentPrice_normal_d:%255B25%20TO%2050%255D__facetSubShelf_ss:4215_Cervejas__currentPrice_normal_d:%5B50%20TO%20100%5D&p=0&gt=list`,
+//   `https://www.paodeacucar.com/secoes/C4215/cervejas?qt=12&ftr=currentPrice_normal_d:%255B50%20TO%20100%255D__facetSubShelf_ss:4215_Cervejas__currentPrice_normal_d:%5B100%20TO%20200%5D&p=0&gt=list`,
+//   `https://www.paodeacucar.com/secoes/C4215/cervejas?qt=12&ftr=currentPrice_normal_d:%255B100%20TO%20200%255D__facetSubShelf_ss:4215_Cervejas__currentPrice_normal_d:%5B200%20TO%20*%5D&p=0&gt=list`,
+//   `https://www.paodeacucar.com/secoes/C4215/refrigerantes?qt=12&ftr=facetSubShelf_ss:4215_Refrigerantes__currentPrice_normal_d:%5B0%20TO%2010%5D&p=0&gt=list`,
+//   `https://www.paodeacucar.com/secoes/C4215/refrigerantes?qt=12&ftr=currentPrice_normal_d:%255B0%20TO%2010%255D__facetSubShelf_ss:4215_Refrigerantes__currentPrice_normal_d:%5B10%20TO%2025%5D&p=0&gt=list`,
+//   `https://www.paodeacucar.com/secoes/C4215/refrigerantes?qt=12&ftr=currentPrice_normal_d:%255B10%20TO%2025%255D__facetSubShelf_ss:4215_Refrigerantes__currentPrice_normal_d:%5B25%20TO%2050%5D&p=0&gt=list`,
+//   `https://www.paodeacucar.com/secoes/C4215/refrigerantes?qt=12&ftr=currentPrice_normal_d:%255B25%20TO%2050%255D__facetSubShelf_ss:4215_Refrigerantes__currentPrice_normal_d:%5B50%20TO%20100%5D&p=0&gt=list`,
+//   `https://www.paodeacucar.com/secoes/C4215/chas-e-mates?qt=12&ftr=facetSubShelf_ss:4215_Ch%25C3%25A1s%20e%20Mates__currentPrice_normal_d:%5B0%20TO%2010%5D&p=0&gt=list`,
+//   `https://www.paodeacucar.com/secoes/C4215/chas-e-mates?qt=12&ftr=currentPrice_normal_d:%255B0%20TO%2010%255D__facetSubShelf_ss:4215_Ch%25C3%25A1s%20e%20Mates__currentPrice_normal_d:%5B10%20TO%2025%5D&p=0&gt=list`,
+//   `https://www.paodeacucar.com/secoes/C4215/chas-e-mates?qt=12&ftr=currentPrice_normal_d:%255B10%20TO%2025%255D__facetSubShelf_ss:4215_Ch%25C3%25A1s%20e%20Mates__currentPrice_normal_d:%5B25%20TO%2050%5D&p=0&gt=list`,
+//   `https://www.paodeacucar.com/secoes/C4215/chas-e-mates?qt=12&ftr=currentPrice_normal_d:%255B25%20TO%2050%255D__facetSubShelf_ss:4215_Ch%25C3%25A1s%20e%20Mates__currentPrice_normal_d:%5B50%20TO%20100%5D&p=0&gt=list`,
+//   `https://www.paodeacucar.com/secoes/C4215/cafes?qt=12&ftr=facetSubShelf_ss:4215_Caf%25C3%25A9s__currentPrice_normal_d:%5B0%20TO%2010%5D&p=0&gt=list`,
+//   `https://www.paodeacucar.com/secoes/C4215/cafes?qt=12&ftr=currentPrice_normal_d:%255B0%20TO%2010%255D__facetSubShelf_ss:4215_Caf%25C3%25A9s__currentPrice_normal_d:%5B10%20TO%2025%5D&p=0&gt=list`,
+//   `https://www.paodeacucar.com/secoes/C4215/cafes?qt=12&ftr=currentPrice_normal_d:%255B10%20TO%2025%255D__facetSubShelf_ss:4215_Caf%25C3%25A9s__currentPrice_normal_d:%5B25%20TO%2050%5D&p=0&gt=list`,
 //   `https://www.paodeacucar.com/secoes/C4215/capsulas-de-cafes-e-chas?qt=12&ftr=facetSubShelf_ss:4215_C%C3%A1psulas%20de%20Caf%C3%A9s%20e%20Ch%C3%A1s&p=0&gt=list`,
 //   `https://www.paodeacucar.com/secoes/C4215/achocolatados-bebidas-lacteas-e-de-soja?qt=12&ftr=facetSubShelf_ss:4215_Achocolatados,%20Bebidas%20L%C3%A1cteas%20e%20de%20Soja&p=0&gt=list`,
 //   `https://www.paodeacucar.com/secoes/C4215/aguas?qt=12&ftr=facetSubShelf_ss:4215_%C3%81guas&p=0&gt=list`,
 //   `https://www.paodeacucar.com/secoes/C4215/leite?qt=12&ftr=facetSubShelf_ss:4215_Leite&p=0&gt=list`,
 //   `https://www.paodeacucar.com/secoes/C4215/energeticos?qt=12&ftr=facetSubShelf_ss:4215_Energ%C3%A9ticos&p=0&gt=list`,
-//   `https://www.paodeacucar.com/secoes/C4215/agua-de-coco?qt=12&ftr=facetSubShelf_ss:4215_%C3%81gua%20de%20Coco&p=0&gt=list`,
 //   `https://www.paodeacucar.com/secoes/C4215/isotonicos?qt=12&ftr=facetSubShelf_ss:4215_Isot%C3%B4nicos&p=0&gt=list`,
+//   `https://www.paodeacucar.com/secoes/C4215/agua-de-coco?qt=12&ftr=facetSubShelf_ss:4215_%C3%81gua%20de%20Coco&p=0&gt=list`,
 //   `https://www.paodeacucar.com/secoes/C4215/bebidas-gaseficadas?qt=12&ftr=facetSubShelf_ss:4215_Bebidas%20gaseficadas&p=0&gt=list`,
-//   `https://www.paodeacucar.com/busca?w=vinhos%20e%20espumantes&c=%20categoria:vinhoseespumantes%20pb:01&qt=12&ftr=currentPrice_normal_d:%5B100%20TO%20200%5D__facetSubShelf_ss:4215_Vinhos%20e%20Espumantes__currentPrice_normal_d:%5B200%20TO%20*%5D&p=1&gt=list`,
-//   `https://www.paodeacucar.com/busca?w=vinhos%20e%20espumantes&c=%20categoria:vinhoseespumantes%20pb:02&qt=12&ftr=currentPrice_normal_d:%5B100%20TO%20200%5D__facetSubShelf_ss:4215_Vinhos%20e%20Espumantes__currentPrice_normal_d:%5B200%20TO%20*%5D&p=1&gt=list`,
-//   `https://www.paodeacucar.com/busca?w=vinhos%20e%20espumantes&c=%20categoria:vinhoseespumantes%20pb:03&qt=12&ftr=currentPrice_normal_d:%5B100%20TO%20200%5D__facetSubShelf_ss:4215_Vinhos%20e%20Espumantes__currentPrice_normal_d:%5B200%20TO%20*%5D&p=1&gt=list`,
-//   `https://www.paodeacucar.com/busca?w=vinhos%20e%20espumantes&c=%20categoria:vinhoseespumantes%20pb:04&qt=12&ftr=currentPrice_normal_d:%5B100%20TO%20200%5D__facetSubShelf_ss:4215_Vinhos%20e%20Espumantes__currentPrice_normal_d:%5B200%20TO%20*%5D&p=1&gt=list`,
-//   `https://www.paodeacucar.com/busca?w=vinhos%20e%20espumantes&c=%20categoria:clubdessommeliers%20categoria:espumantesesidras&qt=12&ftr=currentPrice_normal_d:%5B100%20TO%20200%5D__facetSubShelf_ss:4215_Vinhos%20e%20Espumantes__currentPrice_normal_d:%5B200%20TO%20*%5D&p=1&gt=list`,
-// ];
-
-const url = [
-  `https://www.paodeacucar.com/busca?w=vinho&c=%20tipo:rose&qt=12&ftr=facetSubShelf_ss:4215_Cervejas%20Especiais__facetSubShelf_ss:4215_Vinhos%20e%20Espumantes&p=1&gt=list`,
-  `https://www.paodeacucar.com/busca?w=vinho&c=%20tipo:espumante&qt=12&ftr=facetSubShelf_ss:4215_Cervejas%20Especiais__facetSubShelf_ss:4215_Vinhos%20e%20Espumantes&p=1&gt=list`,
-  `https://www.paodeacucar.com/busca?w=vinho&c=%20tipo:branco%20pb:03&qt=12&ftr=facetSubShelf_ss:4215_Cervejas%20Especiais__facetSubShelf_ss:4215_Vinhos%20e%20Espumantes&p=1&gt=list`,
-  `https://www.paodeacucar.com/busca?w=vinho&c=%20tipo:branco%20pb:01%20pb:02%20pb:00&qt=12&ftr=facetSubShelf_ss:4215_Cervejas%20Especiais__facetSubShelf_ss:4215_Vinhos%20e%20Espumantes&p=1&gt=list`,
-  `https://www.paodeacucar.com/busca?w=vinho&c=%20tipo:tinto%20pb:00%20pb:01%20pb:02&qt=12&ftr=facetSubShelf_ss:4215_Cervejas%20Especiais__facetSubShelf_ss:4215_Vinhos%20e%20Espumantes&p=1&gt=list`,
-  `https://www.paodeacucar.com/busca?w=vinho&c=%20tipo:tinto%20pb:03&qt=12&ftr=facetSubShelf_ss:4215_Cervejas%20Especiais__facetSubShelf_ss:4215_Vinhos%20e%20Espumantes&p=1&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/sucos-e-refrescos?qt=12&ftr=currentPrice_normal_d:%255B100%20TO%20200%255D__facetSubShelf_ss:4215_Sucos%20e%20Refrescos__currentPrice_normal_d:%5B10%20TO%2025%5D&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/sucos-e-refrescos?qt=12&ftr=currentPrice_normal_d:%255B10%20TO%2025%255D__facetSubShelf_ss:4215_Sucos%20e%20Refrescos__currentPrice_normal_d:%5B25%20TO%2050%5D&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/sucos-e-refrescos?qt=12&ftr=currentPrice_normal_d:%255B25%20TO%2050%255D__facetSubShelf_ss:4215_Sucos%20e%20Refrescos__currentPrice_normal_d:%5B50%20TO%20100%5D&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/sucos-e-refrescos?qt=12&ftr=currentPrice_normal_d:%255B100%20TO%20200%255D__facetSubShelf_ss:4215_Sucos%20e%20Refrescos__currentPrice_normal_d:%5B0%20TO%2010%5D&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/cervejas-especiais?qt=12&ftr=currentPrice_normal_d:%255B100%20TO%20200%255D__facetSubShelf_ss:4215_Cervejas%20Especiais__currentPrice_normal_d:%5B0%20TO%2010%5D&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/cervejas-especiais?qt=12&ftr=currentPrice_normal_d:%255B0%20TO%2010%255D__facetSubShelf_ss:4215_Cervejas%20Especiais__currentPrice_normal_d:%5B10%20TO%2025%5D&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/cervejas-especiais?qt=12&ftr=currentPrice_normal_d:%255B10%20TO%2025%255D__facetSubShelf_ss:4215_Cervejas%20Especiais__currentPrice_normal_d:%5B25%20TO%2050%5D&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/cervejas-especiais?qt=12&ftr=currentPrice_normal_d:%255B25%20TO%2050%255D__facetSubShelf_ss:4215_Cervejas%20Especiais__currentPrice_normal_d:%5B50%20TO%20100%5D&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/cervejas-especiais?qt=12&ftr=currentPrice_normal_d:%255B50%20TO%20100%255D__facetSubShelf_ss:4215_Cervejas%20Especiais__currentPrice_normal_d:%5B100%20TO%20200%5D&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/whiskies-e-destilados?qt=12&ftr=facetSubShelf_ss:4215_Whiskies%20e%20Destilados__currentPrice_normal_d:%5B0%20TO%2010%5D&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/whiskies-e-destilados?qt=12&ftr=facetSubShelf_ss:4215_Whiskies%20e%20Destilados__currentPrice_normal_d:%5B0%20TO%2010%5D&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/whiskies-e-destilados?qt=12&ftr=currentPrice_normal_d:%255B0%20TO%2010%255D__facetSubShelf_ss:4215_Whiskies%20e%20Destilados__currentPrice_normal_d:%5B10%20TO%2025%5D&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/whiskies-e-destilados?qt=12&ftr=currentPrice_normal_d:%255B10%20TO%2025%255D__facetSubShelf_ss:4215_Whiskies%20e%20Destilados__currentPrice_normal_d:%5B25%20TO%2050%5D&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/whiskies-e-destilados?qt=12&ftr=currentPrice_normal_d:%255B25%20TO%2050%255D__facetSubShelf_ss:4215_Whiskies%20e%20Destilados__currentPrice_normal_d:%5B50%20TO%20100%5D&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/whiskies-e-destilados?qt=12&ftr=currentPrice_normal_d:%255B50%20TO%20100%255D__facetSubShelf_ss:4215_Whiskies%20e%20Destilados__currentPrice_normal_d:%5B100%20TO%20200%5D&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/whiskies-e-destilados?qt=12&ftr=currentPrice_normal_d:%255B100%20TO%20200%255D__facetSubShelf_ss:4215_Whiskies%20e%20Destilados__currentPrice_normal_d:%5B200%20TO%20*%5D&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/vodka-cachacas-e-saques?qt=12&ftr=facetSubShelf_ss:4215_Vodka%252C%20Cacha%25C3%25A7as%20e%20Saqu%25C3%25AAs__currentPrice_normal_d:%5B0%20TO%2010%5D&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/vodka-cachacas-e-saques?qt=12&ftr=currentPrice_normal_d:%255B0%20TO%2010%255D__facetSubShelf_ss:4215_Vodka%252C%20Cacha%25C3%25A7as%20e%20Saqu%25C3%25AAs__currentPrice_normal_d:%5B10%20TO%2025%5D&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/vodka-cachacas-e-saques?qt=12&ftr=currentPrice_normal_d:%255B10%20TO%2025%255D__facetSubShelf_ss:4215_Vodka%252C%20Cacha%25C3%25A7as%20e%20Saqu%25C3%25AAs__currentPrice_normal_d:%5B25%20TO%2050%5D&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/vodka-cachacas-e-saques?qt=12&ftr=currentPrice_normal_d:%255B25%20TO%2050%255D__facetSubShelf_ss:4215_Vodka%252C%20Cacha%25C3%25A7as%20e%20Saqu%25C3%25AAs__currentPrice_normal_d:%5B50%20TO%20100%5D&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/vodka-cachacas-e-saques?qt=12&ftr=currentPrice_normal_d:%255B50%20TO%20100%255D__facetSubShelf_ss:4215_Vodka%252C%20Cacha%25C3%25A7as%20e%20Saqu%25C3%25AAs__currentPrice_normal_d:%5B100%20TO%20200%5D&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/vodka-cachacas-e-saques?qt=12&ftr=currentPrice_normal_d:%255B100%20TO%20200%255D__facetSubShelf_ss:4215_Vodka%252C%20Cacha%25C3%25A7as%20e%20Saqu%25C3%25AAs__currentPrice_normal_d:%5B200%20TO%20*%5D&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/cervejas?qt=12&ftr=facetSubShelf_ss:4215_Cervejas__currentPrice_normal_d:%5B0%20TO%2010%5D&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/cervejas?qt=12&ftr=currentPrice_normal_d:%255B0%20TO%2010%255D__facetSubShelf_ss:4215_Cervejas__currentPrice_normal_d:%5B10%20TO%2025%5D&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/cervejas?qt=12&ftr=currentPrice_normal_d:%255B10%20TO%2025%255D__facetSubShelf_ss:4215_Cervejas__currentPrice_normal_d:%5B25%20TO%2050%5D&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/cervejas?qt=12&ftr=currentPrice_normal_d:%255B25%20TO%2050%255D__facetSubShelf_ss:4215_Cervejas__currentPrice_normal_d:%5B50%20TO%20100%5D&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/cervejas?qt=12&ftr=currentPrice_normal_d:%255B50%20TO%20100%255D__facetSubShelf_ss:4215_Cervejas__currentPrice_normal_d:%5B100%20TO%20200%5D&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/cervejas?qt=12&ftr=currentPrice_normal_d:%255B100%20TO%20200%255D__facetSubShelf_ss:4215_Cervejas__currentPrice_normal_d:%5B200%20TO%20*%5D&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/refrigerantes?qt=12&ftr=facetSubShelf_ss:4215_Refrigerantes__currentPrice_normal_d:%5B0%20TO%2010%5D&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/refrigerantes?qt=12&ftr=currentPrice_normal_d:%255B0%20TO%2010%255D__facetSubShelf_ss:4215_Refrigerantes__currentPrice_normal_d:%5B10%20TO%2025%5D&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/refrigerantes?qt=12&ftr=currentPrice_normal_d:%255B10%20TO%2025%255D__facetSubShelf_ss:4215_Refrigerantes__currentPrice_normal_d:%5B25%20TO%2050%5D&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/refrigerantes?qt=12&ftr=currentPrice_normal_d:%255B25%20TO%2050%255D__facetSubShelf_ss:4215_Refrigerantes__currentPrice_normal_d:%5B50%20TO%20100%5D&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/chas-e-mates?qt=12&ftr=facetSubShelf_ss:4215_Ch%25C3%25A1s%20e%20Mates__currentPrice_normal_d:%5B0%20TO%2010%5D&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/chas-e-mates?qt=12&ftr=currentPrice_normal_d:%255B0%20TO%2010%255D__facetSubShelf_ss:4215_Ch%25C3%25A1s%20e%20Mates__currentPrice_normal_d:%5B10%20TO%2025%5D&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/chas-e-mates?qt=12&ftr=currentPrice_normal_d:%255B10%20TO%2025%255D__facetSubShelf_ss:4215_Ch%25C3%25A1s%20e%20Mates__currentPrice_normal_d:%5B25%20TO%2050%5D&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/chas-e-mates?qt=12&ftr=currentPrice_normal_d:%255B25%20TO%2050%255D__facetSubShelf_ss:4215_Ch%25C3%25A1s%20e%20Mates__currentPrice_normal_d:%5B50%20TO%20100%5D&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/cafes?qt=12&ftr=facetSubShelf_ss:4215_Caf%25C3%25A9s__currentPrice_normal_d:%5B0%20TO%2010%5D&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/cafes?qt=12&ftr=currentPrice_normal_d:%255B0%20TO%2010%255D__facetSubShelf_ss:4215_Caf%25C3%25A9s__currentPrice_normal_d:%5B10%20TO%2025%5D&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/cafes?qt=12&ftr=currentPrice_normal_d:%255B10%20TO%2025%255D__facetSubShelf_ss:4215_Caf%25C3%25A9s__currentPrice_normal_d:%5B25%20TO%2050%5D&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/capsulas-de-cafes-e-chas?qt=12&ftr=facetSubShelf_ss:4215_C%C3%A1psulas%20de%20Caf%C3%A9s%20e%20Ch%C3%A1s&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/achocolatados-bebidas-lacteas-e-de-soja?qt=12&ftr=facetSubShelf_ss:4215_Achocolatados,%20Bebidas%20L%C3%A1cteas%20e%20de%20Soja&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/aguas?qt=12&ftr=facetSubShelf_ss:4215_%C3%81guas&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/leite?qt=12&ftr=facetSubShelf_ss:4215_Leite&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/energeticos?qt=12&ftr=facetSubShelf_ss:4215_Energ%C3%A9ticos&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/isotonicos?qt=12&ftr=facetSubShelf_ss:4215_Isot%C3%B4nicos&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/agua-de-coco?qt=12&ftr=facetSubShelf_ss:4215_%C3%81gua%20de%20Coco&p=0&gt=list`,
-  `https://www.paodeacucar.com/secoes/C4215/bebidas-gaseficadas?qt=12&ftr=facetSubShelf_ss:4215_Bebidas%20gaseficadas&p=0&gt=list`,
-]
+// ]
 
 // Criando variavel para salvar dados
 data = {
