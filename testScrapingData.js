@@ -68,7 +68,7 @@ async function scrapeProductTest(url) {
   // Fazendo a requisiao da páigna
   // waitUntil -> espear até que todas as requisições da página tenham sido feitas
   await page.goto(url, { waitUntil: 'networkidle0' });
-  await delay(500);
+  await delay(1000);
 
   // Scroll a página
   await page.evaluate((_) => {
