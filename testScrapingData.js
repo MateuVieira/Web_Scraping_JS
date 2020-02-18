@@ -327,11 +327,24 @@ async function takeDisabledProduct(page, i) {
 }
 
 // Para cada URL minerar os dados da página
+// async function rumAllURL() {
+//   for (let i = 0; i < url.length; i++) {
+//     await scrapeProductTest(url[i]);
+//   }
+// }
+
 async function rumAllURL() {
-  for (let i = 0; i < url.length; i++) {
-    await scrapeProductTest(url[i]);
-  }
+  // let promisesArray = [];
+  // for (let i = 0; i < url.length; i++) {
+  //   const newPromise = new Promise((resolve) => resolve(scrapeProductTest(url[i])));
+  //   promisesArray.push(newPromise);
+  // }
+
+  let promisesArray = url.map(item => new Promise((resolve) => resolve(scrapeProductTest(item))));
+
+  const resulte = await Promise.all(promisesArray);
 }
+
 
 // Funcção que ira dar inicio ao processo de mineração de dados
 // e savar os dados no JSON
