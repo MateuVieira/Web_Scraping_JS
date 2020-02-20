@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon testScrapingData"
+    "dev": "nodemon scrapingData"
   },
   "dependencies": {
     "puppeteer": "^2.1.1"
