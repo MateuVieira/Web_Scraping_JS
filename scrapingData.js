@@ -17,7 +17,7 @@ let index = 1;
 
 // Número de Url sendo carregadas em paralelo
 const numberOfURL = 5;
-let infoArrayURL = 0;
+let arrayOfProcess = [];
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
@@ -31,7 +31,7 @@ async function saveJSON() {
 }
 
 // Função de mineração de dados
-async function scrapeProductTest(url) {
+async function scrapeProductTest(url, urlIndex) {
   // console.log('Teste URL -> ', url);
   var hrstart_Main = process.hrtime();
 
@@ -92,7 +92,7 @@ async function scrapeProductTest(url) {
     await page.evaluate((_) => {
       window.scrollBy(window.innerHeight, window.innerHeight * 5);
     });
-    console.log('Scroll ', count);
+    // console.log('Scroll ', count);
 
     // Error
     if (count > 200) {
@@ -107,7 +107,7 @@ async function scrapeProductTest(url) {
     const { numberOfProducts, totalOfProducts } = await UtilsTakeInfo.printTakeIndexPage(page);
     productsList = [numberOfProducts, totalOfProducts];
 
-    console.log('Teste -> ', [numberOfProducts, totalOfProducts]);
+    console.log(`Url -> ${urlIndex}, Total of products -> ${totalOfProducts}, Number of products -> ${numberOfProducts}`);
 
     await delay(500);
 
@@ -121,6 +121,7 @@ async function scrapeProductTest(url) {
     for (i; i <= productsList[0]; i++) {
       // console.log(`Total of Products = ${productsList[0]} - Take Product ${i}  `);
       itemArray.push(new Promise((resolve) => resolve(UtilsTakeInfo.takeInfoProduct(page, i, data, index))));
+      index++;
     }
 
     const resulte = await Promise.all(itemArray);
@@ -155,27 +156,30 @@ async function scrapeProductTest(url) {
 
   console.info('Execution time Main (hr): %ds %dms', hrend_Main[0], hrend_Main[1] / 1000000);
 
-  console.log('END');
+  console.log('END -> ', urlIndex);
 
   // Fechando a página;
   await browser.close();
-
+  arrayOfProcess.pop();
   return true;
 }
 
-async function runAllURL(url) {
-  // console.log('Teste -> ', url);
-  let promisesArray = url.map(item => new Promise((resolve) => resolve(scrapeProductTest(item))));
-
-  const resulte = await Promise.all(promisesArray);
-}
-
-// Para cada URL minerar os dados da página
 async function runURLArray(arrayUrlAuxiliar) {
-  for (let i = 0; i < arrayUrlAuxiliar.length; i++) {
-    // console.log('Teste -> ', arrayUrlAuxiliar[i]);
-    console.log(`Atual arrayOfUrl ${i} - Total -> ${infoArrayURL} - Atual -> ${((i + 1) * 5)}`);
-    await runAllURL(arrayUrlAuxiliar[i]);
+  let indexArrayUrl = 0;
+  let flagStart = true;
+  const lengthArrayUrl = arrayUrlAuxiliar.length;
+
+  while (flagStart || (arrayOfProcess.length > 0)) {
+    flagStart = false;
+    if ((arrayOfProcess.length < numberOfURL) && (indexArrayUrl !== lengthArrayUrl)) {
+
+      const aux = arrayUrlAuxiliar.pop();
+      arrayOfProcess.push(aux);
+      indexArrayUrl++;
+      scrapeProductTest(aux, (indexArrayUrl));
+      console.log(`Atual arrayOfUrl ${indexArrayUrl} - Total -> ${lengthArrayUrl} - progresso -> ${(indexArrayUrl * 100) / lengthArrayUrl}`);
+    }
+    await delay(100);
   }
 }
 
@@ -183,12 +187,10 @@ async function runURLArray(arrayUrlAuxiliar) {
 // e savar os dados no JSON
 async function runScriptSaveJSON(url) {
   var hrstart_script = process.hrtime();
-  // await runAllURL(url);
-  const [arrayUrlAuxiliar] = await Promise.all([buildArrayUrl(url)]);
 
   await delay(1000);
 
-  await runURLArray(arrayUrlAuxiliar);
+  await runURLArray(url);
 
   await saveJSON();
   console.log('END SCRIPT');
@@ -209,8 +211,6 @@ async function runScriptSaveJSON(url) {
 }
 
 //////////////////////////////////////////////////////////////////////////////////////
-
-infoArrayURL = urlArray.length;
 
 // Criando variavel para salvar dados
 data = {
