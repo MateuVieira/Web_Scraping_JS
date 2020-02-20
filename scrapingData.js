@@ -1,4 +1,8 @@
 // Mateus V.
+
+// This script scrapes/extracts data from the product list 
+// of the Pão de Açúcar market website 
+
 // yarn add puppeteer
 // script usando sucrase e nodemon
 
