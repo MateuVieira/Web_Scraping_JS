@@ -3,7 +3,7 @@
 // This script scrapes/extracts data from the product list 
 // of the Pão de Açúcar market website 
 
-// yarn add puppeteer
+// Using puppeteer
 // script usando sucrase e nodemon
 
 import puppeteer from 'puppeteer';
