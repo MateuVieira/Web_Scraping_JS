@@ -9,8 +9,8 @@
 import puppeteer from 'puppeteer';
 import fs from 'fs';
 
-import { urlArray } from './url/data_url';
-import * as UtilsTakeInfo from './util/TakeInfo';
+import { urlArrayPDA } from './url/data_url';
+import * as UtilsTakeInfo from './util/TakeInfoPDA';
 
 let data = {};
 let index = 1;
@@ -215,7 +215,7 @@ async function runScriptSaveJSON(url) {
 // Criando variavel para salvar dados
 data = {
   info: {
-    url: urlArray,
+    url: urlArrayPDA,
     number_products: 0,
     from: `Pão de Açúcar - bebidas`
   },
@@ -224,6 +224,6 @@ data = {
   error: []
 }
 
-runScriptSaveJSON(urlArray);
+runScriptSaveJSON(urlArrayPDA);
 
 

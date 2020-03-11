@@ -1,29 +1,9 @@
+// Util com funções para pegar informações da página do Pão de Açúcar
 module.exports = {
   takeInfoProduct: async function takeInfoProduct(page, i, data, index) {
-    const [nameProduct, imgProduct, oldPriceProduct, newPriceProduct, priceProduct, priceByProduct, priceProductWithDiscont, priceDiscont, priceDisabled] = await Promise.all([
-      this.takeName(page, i),
-      this.takeImgUrl(page, i),
-      this.takeOldPrice(page, i),
-      this.takeNewPrice(page, i),
-      this.takePrice(page, i),
-      this.takePriceByProduct(page, i),
-      this.takePriceProductWithDiscont(page, i),
-      this.takeDiscontProduct(page, i),
-      this.takeDisabledProduct(page, i),
-    ]);
-    // Add dados extraidos a váriavel de armazenamento
-    data.data_products.push({
-      index: index,
-      name: nameProduct || '-',
-      img_url: imgProduct || '-',
-      price: priceProduct || '-',
-      old_price: oldPriceProduct || '-',
-      new_Price: newPriceProduct || '-',
-      price_by_product: priceByProduct || '-',
-      price_with_discont: priceProductWithDiscont || '-',
-      discont: priceDiscont || '-',
-      product_disabled: priceDisabled || '-'
-    });
+    
+    this.takeInfo(page, i, data, index);
+ 
     // Atualizando o index;
     index++;
   },
@@ -187,4 +167,42 @@ module.exports = {
       totalOfProducts: numberInfo[3],
     }
   },
+
+  takeInfoPDA: async function takeInfoPDA(page, i, data, index) {
+    const [
+      nameProduct, 
+      imgProduct, 
+      oldPriceProduct, 
+      newPriceProduct, 
+      priceProduct, 
+      priceByProduct, 
+      priceProductWithDiscont, 
+      priceDiscont, 
+      priceDisabled] = await Promise.all([
+      this.takeName(page, i),
+      this.takeImgUrl(page, i),
+      this.takeOldPrice(page, i),
+      this.takeNewPrice(page, i),
+      this.takePrice(page, i),
+      this.takePriceByProduct(page, i),
+      this.takePriceProductWithDiscont(page, i),
+      this.takeDiscontProduct(page, i),
+      this.takeDisabledProduct(page, i),
+    ]);
+    // Add dados extraidos a váriavel de armazenamento
+    data.data_products.push({
+      index: index,
+      name: nameProduct || '-',
+      img_url: imgProduct || '-',
+      price: priceProduct || '-',
+      old_price: oldPriceProduct || '-',
+      new_Price: newPriceProduct || '-',
+      price_by_product: priceByProduct || '-',
+      price_with_discont: priceProductWithDiscont || '-',
+      discont: priceDiscont || '-',
+      product_disabled: priceDisabled || '-'
+    });
+  },
+  
 }
+

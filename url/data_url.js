@@ -1,4 +1,5 @@
-export const urlArray = [
+// Url's do site do Pão de Açúcar
+export const urlArrayPDA = [
   // Bebidas
   `https://www.paodeacucar.com/secoes/C4215/sucos-e-refrescos?qt=12&ftr=facetSubShelf_ss:4215_Sucos%20e%20Refrescos&p=0&gt=list`,
   `https://www.paodeacucar.com/secoes/C4215/whiskies-e-destilados?qt=12&ftr=facetSubShelf_ss:4215_Cervejas%20Especiais__facetSubShelf_ss:4215_Whiskies%20e%20Destilados&p=0&gt=list`,
@@ -150,4 +151,15 @@ export const urlArray = [
   // `https://www.paodeacucar.com/secoes/C4222/sobremesas-lacteas-e-de-soja?qt=12&ftr=facetSubShelf_ss:4222_Sobremesas%20L%C3%A1cteas%20e%20de%20Soja&p=0&gt=list`,
   // `https://www.paodeacucar.com/secoes/C4222/bebidas-lacteas-e-de-soja?qt=12&ftr=facetSubShelf_ss:4222_Bebidas%20L%C3%A1cteas%20e%20de%20Soja&p=0&gt=list`,
   // `https://www.paodeacucar.com/secoes/C4222/pastas-e-cremes?qt=12&ftr=facetSubShelf_ss:4222_Pastas%20e%20Cremes&p=0&gt=list`,
+];
+
+// Url's do site do Tenda Atacado
+export const urlArrayTA = [
+  // Bebidas
+  'https://www.tendaatacado.com.br/bebidas/cervejas',
+  'https://www.tendaatacado.com.br/bebidas/aguas',
+  'https://www.tendaatacado.com.br/bebidas/refrigerantes',
+  'https://www.tendaatacado.com.br/bebidas/agua-de-coco',
+  'https://www.tendaatacado.com.br/bebidas/destilados',
+  'https://www.tendaatacado.com.br/bebidas/conhaque-licor-e-rum',
 ];
