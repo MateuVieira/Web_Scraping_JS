@@ -26,7 +26,7 @@ async function saveJSON() {
 
   const dataJSON = JSON.stringify(data, null, 4);
 
-  fs.writeFile('./Data/Data_Products.json', dataJSON, { encoding: 'utf8' }, function (err, result) {
+  fs.writeFile('./Data/Data_Products_TA.json', dataJSON, { encoding: 'utf8' }, function (err, result) {
     if (err) console.log('error', err);
   });
 }

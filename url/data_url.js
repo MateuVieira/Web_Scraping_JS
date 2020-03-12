@@ -162,4 +162,16 @@ export const urlArrayTA = [
   'https://www.tendaatacado.com.br/bebidas/agua-de-coco',
   'https://www.tendaatacado.com.br/bebidas/destilados',
   'https://www.tendaatacado.com.br/bebidas/conhaque-licor-e-rum',
+  'https://www.tendaatacado.com.br/bebidas/vinhos',
+  'https://www.tendaatacado.com.br/bebidas/sucos-e-refrescos',
+  'https://www.tendaatacado.com.br/bebidas/whisky',
+  'https://www.tendaatacado.com.br/bebidas/energeticos-e-hidrotonicos',
+  'https://www.tendaatacado.com.br/bebidas/cha-pronto',
+  'https://www.tendaatacado.com.br/bebidas/champanhe-e-espumantes',
+  'https://www.tendaatacado.com.br/bebidas/isotonicos',
 ];
+
+export const fileNameProducts = [
+  'Data_Products_PDA.json', // Pão de Açúcar 
+  'Data_Products_TA.json',  // Tenda Atacado
+]
